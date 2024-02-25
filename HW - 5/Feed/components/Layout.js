@@ -1,24 +1,24 @@
-import React from 'react';
-import { View, StyleSheet } from 'react-native';
-import NavBar from './NavBar';
+import React from "react";
+import { View, StyleSheet } from "react-native";
+import NavBar from "../components/Navbar";
 
-const Layout = ({title, children}) => {
+const Layout = ({ title, children }) => {
   return (
     <View style={styles.container}>
-        <NavBar title={title} />
-        {children}
+      <NavBar title={title} />
+      {children}
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: "#fff",
-        alignItems: "center",
-        justifyContent: "center",
-        width: "100%",
-      },
-})
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "100%",
+  },
+});
 
-export default Layout
+export default Layout;
