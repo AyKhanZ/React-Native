@@ -13,7 +13,7 @@ export type RootStackParams = {
   Login: any;
   SignUp: any;
   Categories: any;
-  Products: IntrinsicAttributes;
+  Products: any;
   Product: any;
 };
 
