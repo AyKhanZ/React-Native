@@ -7,8 +7,10 @@ import HeaderTitle from "../components/HeaderTitle";
 import SearchBar from "../components/SearchBar";
 import ProductItem from "../components/ProductItem";
 import Product from "../screens/Product";
+import { CategoriesLst } from "../data/Categories";
 
 type Props = {
+  data: object;
   navigation: StackNavigationProp<RootStackParams, "Login">;
 };
 const vegetablesList = [
@@ -64,7 +66,8 @@ const vegetablesList = [
 
 const windowWidth = Dimensions.get("window").width;
 
-export default function Products({ navigation }: Props) {
+export default function Products({ navigation, data }: Props) {
+  console.log(data);
   function drawProducts() {
     return vegetablesList.map((product, i) => (
       <ProductItem
@@ -72,7 +75,6 @@ export default function Products({ navigation }: Props) {
         img={product.img}
         price={product.price}
         piece={product.piece}
-        navigateToProduct={() => navigation.navigate("Products")}
         key={i}
         navigation={navigation}
       />

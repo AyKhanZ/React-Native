@@ -6,13 +6,15 @@ import SignUp from "../screens/SignUp";
 import Home from "../screens/Home";
 import Categories from "../screens/Categories";
 import Products from "../screens/Products";
+import Product from "../screens/Product";
 
 export type RootStackParams = {
-  Home: undefined;
-  Login: undefined;
-  SignUp: undefined;
-  Categories: undefined;
-  Products: undefined;
+  Home: any;
+  Login: any;
+  SignUp: any;
+  Categories: any;
+  Products: IntrinsicAttributes;
+  Product: any;
 };
 
 const RootStack = createNativeStackNavigator<RootStackParams>();
@@ -58,6 +60,15 @@ const RootNavigation = () => {
         }}
         name="Products"
         component={Products}
+      />
+      <RootStack.Screen
+        options={{
+          headerShown: true,
+          headerTransparent: true,
+          headerTitle: "",
+        }}
+        name="Product"
+        component={Product}
       />
     </RootStack.Navigator>
   );

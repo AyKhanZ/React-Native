@@ -20,20 +20,23 @@ type Props = {
   title: string;
   price: number;
   piece: any;
-  navigateToProduct: () => void;
   navigation: StackNavigationProp<RootStackParams, "Login">;
 };
 
-const ProductItem = ({
-  img,
-  title,
-  price,
-  piece,
-  navigateToProduct,
-  navigation,
-}: Props) => {
+const ProductItem = ({ img, title, price, piece, navigation }: Props) => {
   return (
-    <Pressable onPress={navigateToProduct}>
+    <Pressable
+      onPress={() =>
+        navigation.navigate("Product", {
+          title: title,
+          img: img,
+          price: price,
+          piece: piece,
+          isPiece: true,
+          country: "Japan",
+        })
+      }
+    >
       <View style={{ flexDirection: "row", width: windowWidth * 0.5 }}>
         <ImageBackground
           source={img}
@@ -52,8 +55,8 @@ const ProductItem = ({
             </Text>
           </View>
           <View style={styles.btnsContainer}>
-            <FavoriteBtn />
-            <BasketBtn />
+            <FavoriteBtn isBig={false} />
+            <BasketBtn hasTitle={false} />
           </View>
         </View>
       </View>

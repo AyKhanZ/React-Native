@@ -6,52 +6,23 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import HeaderTitle from "../components/HeaderTitle";
 import SearchBar from "../components/SearchBar";
 import Card from "../components/Card";
+import { CategoriesLst } from "../data/Categories";
 
 type Props = {
   navigation: StackNavigationProp<RootStackParams, "Login">;
 };
-const categoriesList = [
-  {
-    img: require("../images/categories/bread.jpeg"),
-    title: "Bread",
-    quantity: 26,
-  },
-  {
-    img: require("../images/categories/drinks.jpeg"),
-    title: "Drinks",
-    quantity: 5,
-  },
-  {
-    img: require("../images/categories/fruits.jpeg"),
-    title: "Fruits",
-    quantity: 56,
-  },
-  {
-    img: require("../images/categories/pasta.jpeg"),
-    title: "Pasta",
-    quantity: 78,
-  },
-  {
-    img: require("../images/categories/sweets.jpeg"),
-    title: "Sweets",
-    quantity: 50,
-  },
-  {
-    img: require("../images/categories/vegetables.jpeg"),
-    title: "Vegetables",
-    quantity: 30,
-  },
-];
 
 const windowWidth = Dimensions.get("window").width;
 
 export default function Categories({ navigation }: Props) {
+  const data = CategoriesLst;
   function drawCards() {
-    return categoriesList.map((card, i) => (
+    return CategoriesLst.map((card, i) => (
       <Card
         title={card.title}
         img={card.img}
         quantity={card.quantity}
+        data={data[i]}
         key={i}
         navigation={navigation}
       />

@@ -17,12 +17,13 @@ type Props = {
   img: ImageSourcePropType;
   title: string;
   quantity: number;
+  data: any;
   navigation: StackNavigationProp<RootStackParams, "Login">;
 };
 
-const Card = ({ img, title, quantity, navigation }: Props) => {
+const Card = ({ img, title, quantity, data, navigation }: Props) => {
   return (
-    <Pressable onPress={() => navigation.navigate("Products")}>
+    <Pressable onPress={() => navigation.navigate("Products", { data: data })}>
       <ImageBackground
         source={img}
         borderTopLeftRadius={15}
