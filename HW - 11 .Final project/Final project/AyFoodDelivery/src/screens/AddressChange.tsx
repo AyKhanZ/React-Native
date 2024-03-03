@@ -18,29 +18,42 @@ type Props = {
 
 const windowWidth = Dimensions.get("window").width;
 
-const CardChange = ({ navigation }: Props) => {
+const AddressChange = ({ navigation }: Props) => {
   const user = useUser();
-  const [cardNumber, setCardNumber] = useState("");
-  const [cardDate, setCardDate] = useState("");
-  const [cardCVV, setCardCVV] = useState("");
+  const [street, setStreet] = useState("");
+  const [apartment, setApartment] = useState("");
+  const [city, setCity] = useState("");
+  const [country, setCountry] = useState("");
 
   return (
     <KeyboardAvoidingView>
       <View style={styles.container}>
-        <Title title="Card number" />
+        <Title title="Street" />
         <InputField
-          placeholder="1234567812345678"
-          data={cardNumber}
-          setData={setCardNumber}
+          placeholder="Nizami Q. 114"
+          data={street}
+          setData={setStreet}
         />
-        <Title title="Date" />
-        <InputField placeholder="03/24" data={cardDate} setData={setCardDate} />
-        <Title title="CVV" />
-        <InputField placeholder="123" data={cardCVV} setData={setCardCVV} />
+        <Title title="Apartment" />
+        <InputField placeholder="113" data={apartment} setData={setApartment} />
+        <Title title="City" />
+        <InputField placeholder="Baku" data={city} setData={setCity} />
+        <Title title="Country" />
+        <InputField
+          placeholder="Azerbaijan"
+          data={country}
+          setData={setCountry}
+        />
         <Btn
           btnText="Use this card"
           onPress={() => {
-            user.changeCard(user.user.email, cardNumber, cardDate, cardCVV);
+            user.changeAddress(
+              user.user.email,
+              street,
+              apartment,
+              city,
+              country
+            );
             navigation.navigate("Profile");
           }}
         />
@@ -49,7 +62,7 @@ const CardChange = ({ navigation }: Props) => {
   );
 };
 
-export default CardChange;
+export default AddressChange;
 
 const styles = StyleSheet.create({
   container: {

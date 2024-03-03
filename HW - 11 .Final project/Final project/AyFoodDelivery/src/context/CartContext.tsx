@@ -42,7 +42,7 @@ type UserType = {
   ) => any;
 };
 
-type UserContextType = {
+type CartContextType = {
   user: UserType;
   changeCard: (
     email: string,
@@ -59,7 +59,7 @@ type UserContextType = {
   ) => any;
 };
 
-export const UserContext = createContext<UserContextType>({
+export const CartContext = createContext<CartContextType>({
   user: {
     name: "Aykhan",
     email: "z",
@@ -91,15 +91,15 @@ export const UserContext = createContext<UserContextType>({
   ) => {},
 });
 
-export const useUser = () => {
-  return useContext(UserContext);
+export const useCart = () => {
+  return useContext(CartContext);
 };
 
-interface UserProviderProps {
+interface CartProviderProps {
   children: React.ReactNode;
 }
 
-const UserProvider = ({ children }: UserProviderProps) => {
+const CartProvider = ({ children }: CartProviderProps) => {
   const userData = useAuth();
   const user = userData.getUser(userData.email, userData.password);
 
@@ -165,8 +165,10 @@ const UserProvider = ({ children }: UserProviderProps) => {
 
   const contextValue = { user, changeCard, changeAddress };
   return (
-    <UserContext.Provider value={contextValue}>{children}</UserContext.Provider>
+    <CartProvider.Provider value={contextValue}>
+      {children}
+    </CartProvider.Provider>
   );
 };
 
-export default UserProvider;
+export default CartProvider;

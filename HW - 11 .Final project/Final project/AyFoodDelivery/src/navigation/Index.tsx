@@ -17,6 +17,8 @@ export type RootStackParams = {
   Categories: any;
   Products: any;
   Product: any;
+  Profile: any;
+  AddressChange: any;
   Tabs: any;
   CardChange: any;
 };

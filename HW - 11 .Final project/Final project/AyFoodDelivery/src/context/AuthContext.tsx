@@ -99,7 +99,6 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
       cart: [],
     };
     Users.push(user);
-    console.log(Users);
   };
 
   const getUser = (email: string, password: string) => {
