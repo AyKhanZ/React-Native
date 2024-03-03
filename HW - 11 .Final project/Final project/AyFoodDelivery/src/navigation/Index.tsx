@@ -7,6 +7,8 @@ import Home from "../screens/Home";
 import Categories from "../screens/Categories";
 import Products from "../screens/Products";
 import Product from "../screens/Product";
+import BottomTabs from "./TabsNavigation";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export type RootStackParams = {
   Home: any;
@@ -15,62 +17,50 @@ export type RootStackParams = {
   Categories: any;
   Products: any;
   Product: any;
+  Tabs: any;
 };
 
 const RootStack = createNativeStackNavigator<RootStackParams>();
 
 const RootNavigation = () => {
   return (
-    <RootStack.Navigator>
-      <RootStack.Screen
-        options={{
-          headerShown: false,
-        }}
-        name="Home"
-        component={Home}
-      />
-      <RootStack.Screen
-        options={{
-          headerShown: false,
-        }}
-        name="Login"
-        component={Login}
-      />
-      <RootStack.Screen
-        options={{
-          headerShown: false,
-        }}
-        name="SignUp"
-        component={SignUp}
-      />
-      <RootStack.Screen
-        options={{
-          headerShown: true,
-          headerTransparent: true,
-          headerTitle: "",
-        }}
-        name="Categories"
-        component={Categories}
-      />
-      <RootStack.Screen
-        options={{
-          headerShown: true,
-          headerTransparent: true,
-          headerTitle: "",
-        }}
-        name="Products"
-        component={Products}
-      />
-      <RootStack.Screen
-        options={{
-          headerShown: true,
-          headerTransparent: true,
-          headerTitle: "",
-        }}
-        name="Product"
-        component={Product}
-      />
-    </RootStack.Navigator>
+    <SafeAreaView style={{ flex: 1 }}>
+      <RootStack.Navigator>
+        <RootStack.Screen
+          // options={{
+          //   headerShown: false,
+          // }}
+          name="Home"
+          component={Home}
+        />
+        <RootStack.Screen
+          // options={{
+          //   headerShown: false,
+          // }}
+          name="Login"
+          component={Login}
+        />
+        <RootStack.Screen
+          // options={{
+          //   headerShown: false,
+          // }}
+          name="SignUp"
+          component={SignUp}
+        />
+        <RootStack.Screen
+          options={{
+            // headerShown: true,
+            // headerTransparent: true,
+            // headerTitle: "",
+            header: () => {
+              return <View></View>;
+            },
+          }}
+          name="Tabs"
+          component={BottomTabs}
+        />
+      </RootStack.Navigator>
+    </SafeAreaView>
   );
 };
 

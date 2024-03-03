@@ -24,14 +24,9 @@ export default function Login({ navigation }: Props) {
   const [password, setPassword] = useState("");
 
   const authData = useAuth();
-  {
-    console.log();
-  }
   const onPressHandler = () => {
-    if (authData.logIn(email, password)) navigation.navigate("Categories");
+    if (authData.logIn(email, password)) navigation.navigate("Tabs");
     else alert("Incorrect");
-    setEmail("");
-    setPassword("");
   };
 
   return (
@@ -39,7 +34,7 @@ export default function Login({ navigation }: Props) {
       <KeyboardAvoidingView style={styles.container}>
         <View style={styles.loginContainer}>
           <Title title={"Sign In"} />
-          <InputField placeholder="Email" email={email} setEmail={setEmail} />
+          <InputField placeholder="Email" data={email} setData={setEmail} />
           <PasswordInput password={password} setPassword={setPassword} />
           <Btn btnText="Login" onPress={onPressHandler} />
           <Pressable onPress={() => navigation.navigate("SignUp")}>

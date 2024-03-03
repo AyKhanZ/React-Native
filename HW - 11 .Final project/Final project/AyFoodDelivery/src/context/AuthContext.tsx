@@ -26,29 +26,31 @@ type AuthContextType = {
   favorites?: [];
   cart?: [];
   logIn: (email: string, password: string) => boolean;
+  signUp: (name: string, email: string, password: string) => void;
 };
 
 export const AuthContext = createContext<AuthContextType>({
-  name: "Aykhan",
-  email: "zeynalovayxan70@gmail.com",
-  password: "ARnold151618",
+  name: "",
+  email: "",
+  password: "",
   paymentMethod: {
-    nameOfCard: "Leo card",
-    hexCode: "1234567812345678",
-    date: "27/02",
-    cvv: "999",
+    nameOfCard: "",
+    hexCode: "",
+    date: "",
+    cvv: "",
   },
   deliveryAdress: {
-    street: "Nizami 14",
-    apartment: "117",
-    city: "Baku",
-    country: "Azerbaijan",
+    street: "",
+    apartment: "",
+    city: "",
+    country: "",
   },
-  deliveryOpptions: "I'll pick it up by myself",
+  deliveryOpptions: "",
   nonContactDelivery: false,
   favorites: [],
   cart: [],
   logIn: (email: string, password: string) => false,
+  signUp: (name: string, email: string, password: string) => {},
 });
 
 export const useAuth = () => {
@@ -65,12 +67,40 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
   const [password, setPassword] = useState("");
 
   const logIn = (email: string, password: string) => {
+    setEmail(email);
+    setPassword(password);
     return Users.some(
       (user) => user.email == email && user.password == password
     );
   };
 
-  const contextValue = { name, email, password, logIn };
+  const signUp = (name: string, email: string, password: string) => {
+    const user = {
+      name: name,
+      email: email,
+      password: password,
+      paymentMethod: {
+        nameOfCard: "",
+        hexCode: "",
+        date: "",
+        cvv: "",
+      },
+      deliveryAdress: {
+        street: "",
+        apartment: "",
+        city: "",
+        country: "",
+      },
+      deliveryOpptions: "",
+      nonContactDelivery: false,
+      favorites: [],
+      cart: [],
+    };
+    Users.push(user);
+    console.log(Users);
+  };
+
+  const contextValue = { name, email, password, logIn, signUp };
   return (
     <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>
   );
