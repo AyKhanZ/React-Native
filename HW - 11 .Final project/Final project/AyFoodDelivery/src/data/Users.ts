@@ -1,8 +1,8 @@
 export const Users = [
   {
     name: "Aykhan",
-    email: "zeynalovayxan70@gmail.com",
-    password: "ARnold151618",
+    email: "z",
+    password: "z",
     paymentMethod: {
       nameOfCard: "Leo card",
       hexCode: "1234567812345678",

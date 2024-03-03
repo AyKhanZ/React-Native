@@ -6,6 +6,7 @@ import CategoriesNav from "./CategoriesNavigation";
 import CategoriesIcon from "../icons/CategoriesIcon";
 import CartIcon from "../icons/CartIcon";
 import ProfileIcon from "../icons/ProfileIcon";
+import ProfileNav from "./ProfileNavigation";
 
 const Tab = createBottomTabNavigator();
 
@@ -40,8 +41,8 @@ function BottomTabs() {
           ),
           tabBarShowLabel: false,
         }}
-        name="Profile"
-        component={Profile}
+        name="ProfileNav"
+        component={ProfileNav}
       />
     </Tab.Navigator>
   );

@@ -27,6 +27,7 @@ type AuthContextType = {
   cart?: [];
   logIn: (email: string, password: string) => boolean;
   signUp: (name: string, email: string, password: string) => void;
+  getUser: (email: string, password: string) => any;
 };
 
 export const AuthContext = createContext<AuthContextType>({
@@ -51,6 +52,7 @@ export const AuthContext = createContext<AuthContextType>({
   cart: [],
   logIn: (email: string, password: string) => false,
   signUp: (name: string, email: string, password: string) => {},
+  getUser: (email: string, password: string) => {},
 });
 
 export const useAuth = () => {
@@ -100,7 +102,13 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
     console.log(Users);
   };
 
-  const contextValue = { name, email, password, logIn, signUp };
+  const getUser = (email: string, password: string) => {
+    const user = Users.find(
+      (user) => user.email == email && user.password == password
+    );
+    return user;
+  };
+  const contextValue = { name, email, password, logIn, signUp, getUser };
   return (
     <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>
   );

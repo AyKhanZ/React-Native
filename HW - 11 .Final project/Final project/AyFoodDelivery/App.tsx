@@ -6,13 +6,16 @@ import RootNavigation from "./src/navigation/Index";
 import { NavigationContainer } from "@react-navigation/native";
 import AuthProvider from "./src/context/AuthContext";
 import { useAuth } from "./src/context/AuthContext";
+import UserProvider from "./src/context/UserContext";
 
 export default function App() {
   return (
     <AuthProvider>
-      <NavigationContainer>
-        <RootNavigation />
-      </NavigationContainer>
+      <UserProvider>
+        <NavigationContainer>
+          <RootNavigation />
+        </NavigationContainer>
+      </UserProvider>
     </AuthProvider>
   );
 }
