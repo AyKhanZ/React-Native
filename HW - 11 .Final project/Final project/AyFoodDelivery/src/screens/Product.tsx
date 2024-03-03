@@ -24,30 +24,25 @@ const windowHeight = Dimensions.get("window").height;
 
 export default function Product({ route }: Props) {
   const { params } = route;
+  const product = params.product;
   return (
     <SafeAreaView style={styles.container}>
       <ImageBackground
-        source={params.img}
+        source={product.img}
         resizeMode="cover"
         style={styles.image}
       >
         <View style={styles.whiteContainer}>
-          <Text style={styles.title}>{params.title}</Text>
+          <Text style={styles.title}>{product.title}</Text>
           <View style={styles.priceContainer}>
-            <Text style={styles.price}>{params.price}</Text>
+            <Text style={styles.price}>{product.price}</Text>
             <Text style={styles.pieceOrKg}>
-              € / {params.isPiece === true ? "piece" : "kg"}
+              € / {product.isPiece === true ? "piece" : "kg"}
             </Text>
           </View>
           <Text style={styles.greenText}>~ 150 gr / piece</Text>
-          <Text style={styles.country}>{params.country}</Text>
-          <Text style={styles.desciption}>
-            Lettuce is an annual plant of the daisy family, Asteraceae. It is
-            most often grown as a leaf vegetable, but sometimes for its stem and
-            seeds. Lettuce is most often used for salads, although it is also
-            seen in other kinds of food, such as soups, sandwiches and wraps; it
-            can also be grilled.
-          </Text>
+          <Text style={styles.country}>{product.country}</Text>
+          <Text style={styles.desciption}>{product.description}</Text>
           <View style={styles.btns}>
             <FavoriteBtn isBig={true} />
             <BasketBtn hasTitle={true} />

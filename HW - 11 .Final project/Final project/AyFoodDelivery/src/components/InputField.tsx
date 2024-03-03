@@ -2,18 +2,20 @@ import React from "react";
 import { StyleSheet, Text, TextInput, View } from "react-native";
 import { useState } from "react";
 
-type Props = {
+interface Props {
+  email: string;
+  setEmail: (password: string) => void;
   placeholder: string;
-};
-const InputField = ({ placeholder }: Props) => {
-  const [searchWord, setSearchWord] = useState("");
+}
 
+const InputField: React.FC<Props> = ({ placeholder, email, setEmail }) => {
   return (
     <View style={styles.container}>
       <TextInput
         style={styles.heading}
         placeholder={placeholder}
-        onChangeText={setSearchWord}
+        value={email}
+        onChangeText={(text) => setEmail(text)}
       ></TextInput>
     </View>
   );

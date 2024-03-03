@@ -13,19 +13,22 @@ import { RootStackParams } from "../navigation/Index";
 
 const windowWidth = Dimensions.get("window").width;
 
-type Props = {
-  img: ImageSourcePropType;
+type CategoryProps = {
   title: string;
+  img: ImageSourcePropType;
   quantity: number;
-  data: any;
+  products: any[];
+};
+type Props = {
+  data: CategoryProps;
   navigation: StackNavigationProp<RootStackParams, "Login">;
 };
 
-const Card = ({ img, title, quantity, data, navigation }: Props) => {
+const Card = ({ data, navigation }: Props) => {
   return (
     <Pressable onPress={() => navigation.navigate("Products", { data: data })}>
       <ImageBackground
-        source={img}
+        source={data.img}
         borderTopLeftRadius={15}
         borderTopRightRadius={15}
         resizeMode="cover"
@@ -34,8 +37,8 @@ const Card = ({ img, title, quantity, data, navigation }: Props) => {
         <View style={styles.container}></View>
       </ImageBackground>
       <View style={styles.content}>
-        <Text style={styles.title}>{title}</Text>
-        <Text style={styles.quantity}>({quantity})</Text>
+        <Text style={styles.title}>{data.title}</Text>
+        <Text style={styles.quantity}>({data.quantity})</Text>
       </View>
     </Pressable>
   );

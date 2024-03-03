@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import { View, TextInput, StyleSheet, Pressable, Text } from "react-native";
 
-const PasswordInput = () => {
-  const [password, setPassword] = useState("");
+interface Props {
+  password: string;
+  setPassword: (password: string) => void;
+}
+
+const PasswordInput: React.FC<Props> = ({ password, setPassword }) => {
   const [showPassword, setShowPassword] = useState(false);
 
   return (

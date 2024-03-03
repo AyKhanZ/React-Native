@@ -12,14 +12,26 @@ import PasswordInput from "../components/PasswordInput";
 import Title from "../components/Title";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParams } from "../navigation/Index";
+import { useAuth } from "../context/AuthContext";
+import React, { useState } from "react";
 
 type Props = {
   navigation: StackNavigationProp<RootStackParams, "Login">;
 };
 
 export default function Login({ navigation }: Props) {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const authData = useAuth();
+  {
+    console.log();
+  }
   const onPressHandler = () => {
-    navigation.navigate("SignUp");
+    if (authData.logIn(email, password)) navigation.navigate("Categories");
+    else alert("Incorrect");
+    setEmail("");
+    setPassword("");
   };
 
   return (
@@ -27,11 +39,11 @@ export default function Login({ navigation }: Props) {
       <KeyboardAvoidingView style={styles.container}>
         <View style={styles.loginContainer}>
           <Title title={"Sign In"} />
-          <InputField placeholder="Email" />
-          <PasswordInput />
+          <InputField placeholder="Email" email={email} setEmail={setEmail} />
+          <PasswordInput password={password} setPassword={setPassword} />
           <Btn btnText="Login" onPress={onPressHandler} />
-          <Pressable onPress={onPressHandler}>
-            <Text style={styles.text}>Forgot your password?</Text>
+          <Pressable onPress={() => navigation.navigate("SignUp")}>
+            <Text style={styles.text}>Don't have an account?</Text>
           </Pressable>
         </View>
       </KeyboardAvoidingView>

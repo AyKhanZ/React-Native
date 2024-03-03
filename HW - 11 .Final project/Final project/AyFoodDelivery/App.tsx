@@ -4,12 +4,16 @@ import PasswordInput from "./src/components/PasswordInput";
 import Login from "./src/screens/Login";
 import RootNavigation from "./src/navigation/Index";
 import { NavigationContainer } from "@react-navigation/native";
+import AuthProvider from "./src/context/AuthContext";
+import { useAuth } from "./src/context/AuthContext";
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <RootNavigation />
-    </NavigationContainer>
+    <AuthProvider>
+      <NavigationContainer>
+        <RootNavigation />
+      </NavigationContainer>
+    </AuthProvider>
   );
 }
 

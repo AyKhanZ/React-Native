@@ -18,14 +18,7 @@ export default function Categories({ navigation }: Props) {
   const data = CategoriesLst;
   function drawCards() {
     return CategoriesLst.map((card, i) => (
-      <Card
-        title={card.title}
-        img={card.img}
-        quantity={card.quantity}
-        data={data[i]}
-        key={i}
-        navigation={navigation}
-      />
+      <Card data={card} key={i} navigation={navigation} />
     ));
   }
   return (

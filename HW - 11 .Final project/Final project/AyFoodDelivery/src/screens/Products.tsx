@@ -6,78 +6,20 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import HeaderTitle from "../components/HeaderTitle";
 import SearchBar from "../components/SearchBar";
 import ProductItem from "../components/ProductItem";
-import Product from "../screens/Product";
-import { CategoriesLst } from "../data/Categories";
 
 type Props = {
-  data: object;
+  route: any;
   navigation: StackNavigationProp<RootStackParams, "Login">;
 };
-const vegetablesList = [
-  {
-    img: require("../images/vegetables/BostonLettuce.jpeg"),
-    title: "Boston Lettuce",
-    price: 0.53,
-    piece: true,
-  },
-  {
-    img: require("../images/vegetables/Carrot.jpeg"),
-    title: "Carrot",
-    price: 0.81,
-    piece: false,
-  },
-  {
-    img: require("../images/vegetables/Cucumber.jpeg"),
-    title: "Cucumber",
-    price: 0.56,
-    piece: false,
-  },
-  {
-    img: require("../images/vegetables/Onion.jpg"),
-    title: "Onion",
-    price: 0.78,
-    piece: false,
-  },
-  {
-    img: require("../images/vegetables/PurpleCauliflower.jpeg"),
-    title: "Purple Cauliflower",
-    price: 0.79,
-    piece: true,
-  },
-  {
-    img: require("../images/vegetables/RedOnion.jpg"),
-    title: "Red Onion",
-    price: 0.33,
-    piece: false,
-  },
-  {
-    img: require("../images/vegetables/SavoyCabbage.jpeg"),
-    title: "Savoy Cabbage",
-    price: 0.94,
-    piece: false,
-  },
-  {
-    img: require("../images/vegetables/Tomato.jpg"),
-    title: "Tomato",
-    price: 0.32,
-    piece: false,
-  },
-];
 
 const windowWidth = Dimensions.get("window").width;
 
-export default function Products({ navigation, data }: Props) {
-  console.log(data);
+export default function Products({ navigation, route }: Props) {
+  const { params } = route;
+  const data = params.data.products;
   function drawProducts() {
-    return vegetablesList.map((product, i) => (
-      <ProductItem
-        title={product.title}
-        img={product.img}
-        price={product.price}
-        piece={product.piece}
-        key={i}
-        navigation={navigation}
-      />
+    return data.map((product: any, i: number) => (
+      <ProductItem product={product} key={i} navigation={navigation} />
     ));
   }
 

@@ -15,31 +15,33 @@ import BasketBtn from "./BasketBtn";
 
 const windowWidth = Dimensions.get("window").width;
 
-type Props = {
-  img: ImageSourcePropType;
+type ProductProps = {
   title: string;
   price: number;
-  piece: any;
+  country: string;
+  isPiece: boolean;
+  description: string;
+  isFavorite: boolean;
+  isInCart: boolean;
+  img: ImageSourcePropType;
+};
+type Props = {
+  product: ProductProps;
   navigation: StackNavigationProp<RootStackParams, "Login">;
 };
 
-const ProductItem = ({ img, title, price, piece, navigation }: Props) => {
+const ProductItem = ({ product, navigation }: Props) => {
   return (
     <Pressable
       onPress={() =>
         navigation.navigate("Product", {
-          title: title,
-          img: img,
-          price: price,
-          piece: piece,
-          isPiece: true,
-          country: "Japan",
+          product: product,
         })
       }
     >
       <View style={{ flexDirection: "row", width: windowWidth * 0.5 }}>
         <ImageBackground
-          source={img}
+          source={product.img}
           borderRadius={15}
           resizeMode="cover"
           style={styles.image}
@@ -47,11 +49,11 @@ const ProductItem = ({ img, title, price, piece, navigation }: Props) => {
           <View style={styles.container}></View>
         </ImageBackground>
         <View style={styles.content}>
-          <Text style={styles.title}>{title}</Text>
+          <Text style={styles.title}>{product.title}</Text>
           <View style={styles.priceContainer}>
-            <Text style={styles.price}>{price}</Text>
+            <Text style={styles.price}>{product.price}</Text>
             <Text style={styles.pieceOrKg}>
-              € / {piece === true ? "piece" : "kg"}
+              € / {product.isPiece === true ? "piece" : "kg"}
             </Text>
           </View>
           <View style={styles.btnsContainer}>
