@@ -18,6 +18,7 @@ export type RootStackParams = {
   Products: any;
   Product: any;
   Tabs: any;
+  CardChange: any;
 };
 
 const RootStack = createNativeStackNavigator<RootStackParams>();

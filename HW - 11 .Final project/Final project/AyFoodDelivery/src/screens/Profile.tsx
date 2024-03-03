@@ -7,7 +7,7 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParams } from "../navigation/Index";
 
 type Props = {
-  navigation: StackNavigationProp<RootStackParams, "Login">;
+  navigation: StackNavigationProp<RootStackParams, "CardChange">;
 };
 
 const Profile = ({ navigation }: Props) => {
@@ -27,7 +27,7 @@ const Profile = ({ navigation }: Props) => {
       <Text>fa {user.favorites}</Text>
       <Text>cart {user.cart}</Text>
       <Title title={"Card"} />
-      <Btn btnText="Change" onPress={() => navigation.navigate("Product")} />
+      <Btn btnText="Change" onPress={() => navigation.navigate("CardChange")} />
     </View>
   );
 };

@@ -36,6 +36,7 @@ function BottomTabs() {
       />
       <Tab.Screen
         options={{
+          headerShown: false,
           tabBarIcon: ({ focused }) => (
             <ProfileIcon color={focused ? "#7203FF" : "#9586A8"} />
           ),

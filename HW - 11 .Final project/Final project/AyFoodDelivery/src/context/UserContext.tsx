@@ -1,5 +1,6 @@
-import { createContext, useContext } from "react";
+import { createContext, useContext, useState } from "react";
 import { useAuth } from "./AuthContext";
+import { Users } from "../data/Users";
 
 type PaymentMethodType = {
   nameOfCard: string;
@@ -25,10 +26,11 @@ type UserType = {
   nonContactDelivery?: boolean;
   favorites?: any[];
   cart?: any[];
+  changeCard?: () => void;
 };
 
 type UserContextType = {
-  user: UserType;
+  user?: UserType;
 };
 
 export const UserContext = createContext<UserContextType>({
@@ -36,6 +38,23 @@ export const UserContext = createContext<UserContextType>({
     name: "",
     email: "",
     password: "",
+    paymentMethod: {
+      nameOfCard: "",
+      hexCode: "",
+      date: "",
+      cvv: "",
+    },
+    deliveryAdress: {
+      street: "",
+      apartment: "",
+      city: "",
+      country: "",
+    },
+    deliveryOpptions: "",
+    nonContactDelivery: false,
+    favorites: [],
+    cart: [],
+    changeCard: () => {},
   },
 });
 
@@ -51,7 +70,28 @@ const UserProvider = ({ children }: UserProviderProps) => {
   const userData = useAuth();
   const user = userData.getUser(userData.email, userData.password);
 
-  const contextValue = { user };
+  const [hexCode, setHexCode] = useState("");
+  const [date, setDate] = useState("");
+  const [cvv, setCvv] = useState("");
+
+  const changeCard = (
+    email: string,
+    hexCode: string,
+    date: string,
+    cvv: string
+  ) => {
+    setHexCode(hexCode);
+    setDate(date);
+    setCvv(cvv);
+
+    user.paymentMethod.hexCode = hexCode;
+    user.paymentMethod.date = date;
+    user.paymentMethod.cvv = cvv;
+    console.log(user);
+    console.log(user.paymentMethod.hexCode);
+  };
+
+  const contextValue = { user, changeCard };
   return (
     <UserContext.Provider value={contextValue}>{children}</UserContext.Provider>
   );
