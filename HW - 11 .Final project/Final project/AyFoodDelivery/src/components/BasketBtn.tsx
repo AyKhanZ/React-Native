@@ -3,17 +3,28 @@ import { useState } from "react";
 import { Pressable, View, Text, StyleSheet } from "react-native";
 import BasketIconActive from "../icons/BasketIconActive";
 import BasketIcon from "../icons/BasketIcon";
+import { useCart } from "../context/CartContext";
 
 type Props = {
+  product: any;
   hasTitle: boolean;
 };
 
-const BasketBtn = ({ hasTitle }: Props) => {
+const BasketBtn = ({ hasTitle, product }: Props) => {
   const [isActive, setIsActive] = useState(false);
+
+  const cart = useCart();
+
+  const handlePress = () => {
+    setIsActive((prev) => !prev);
+    product.isInCart = !isActive;
+    if (cart && cart.addToCart) cart.addToCart(product);
+  };
+
   return (
     <Pressable
       style={hasTitle == true ? styles.btnbig : styles.btn}
-      onPress={() => setIsActive(!isActive)}
+      onPress={handlePress}
     >
       {hasTitle === true ? (
         <View

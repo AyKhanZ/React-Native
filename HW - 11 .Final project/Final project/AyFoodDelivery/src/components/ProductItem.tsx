@@ -58,7 +58,7 @@ const ProductItem = ({ product, navigation }: Props) => {
           </View>
           <View style={styles.btnsContainer}>
             <FavoriteBtn isBig={false} />
-            <BasketBtn hasTitle={false} />
+            <BasketBtn product={product} hasTitle={false} />
           </View>
         </View>
       </View>

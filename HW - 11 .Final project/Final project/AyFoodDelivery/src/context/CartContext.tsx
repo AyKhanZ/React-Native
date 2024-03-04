@@ -1,94 +1,36 @@
-import { createContext, useContext } from "react";
+import React, { createContext, useContext } from "react";
 import { useAuth } from "./AuthContext";
-import { useState } from "react";
+import { useUser } from "./UserContext";
 import { Users } from "../data/Users";
 
-type PaymentMethodType = {
-  nameOfCard: string;
-  hexCode: string;
-  date: string;
-  cvv: string;
-};
-
-type DeliveryAdressType = {
-  street: string;
-  apartment: string;
-  city: string;
+type Product = {
+  title: string;
+  price: number;
   country: string;
+  description: string;
+  isFavorite: false;
+  isInCart: false;
+  img: undefined;
+  isPiece: false; // Продается по весу
 };
 
-type UserType = {
-  name: string;
+type CartType = {
   email: string;
-  password: string;
-  paymentMethod?: PaymentMethodType;
-  deliveryAdress?: DeliveryAdressType;
-  deliveryOpptions?: string;
-  nonContactDelivery?: boolean;
-  favorites?: any[];
   cart?: any[];
-  changeCard?: (
-    email: string,
-    hexCode: string,
-    date: string,
-    cvv: string
-  ) => any;
-  changeAddress?: (
-    email: string,
-    street: string,
-    apartment: string,
-    city: string,
-    country: string
-  ) => any;
+  addToCart?: (product: Product) => void;
 };
 
 type CartContextType = {
-  user: UserType;
-  changeCard: (
-    email: string,
-    hexCode: string,
-    date: string,
-    cvv: string
-  ) => any;
-  changeAddress: (
-    email: string,
-    street: string,
-    apartment: string,
-    city: string,
-    country: string
-  ) => any;
+  cartObj: CartType;
+  addToCart?: (product: Product) => void;
 };
 
 export const CartContext = createContext<CartContextType>({
-  user: {
-    name: "Aykhan",
-    email: "z",
-    password: "z",
-    paymentMethod: {
-      nameOfCard: "Leo card",
-      hexCode: "1234567812345678",
-      date: "27/02",
-      cvv: "999",
-    },
-    deliveryAdress: {
-      street: "Nizami 14",
-      apartment: "117",
-      city: "Baku",
-      country: "Azerbaijan",
-    },
-    deliveryOpptions: "I'll pick it up by myself",
-    nonContactDelivery: false,
-    favorites: [],
+  cartObj: {
+    email: "",
     cart: [],
   },
-  changeCard: (email: string, hexCode: string, date: string, cvv: string) => {},
-  changeAddress: (
-    email: string,
-    street: string,
-    apartment: string,
-    city: string,
-    country: string
-  ) => {},
+  addToCart: (product: Product) => {},
 });
 
 export const useCart = () => {
@@ -99,75 +41,33 @@ interface CartProviderProps {
   children: React.ReactNode;
 }
 
-const CartProvider = ({ children }: CartProviderProps) => {
+const CartProvider: React.FC<CartProviderProps> = ({
+  children,
+}: CartProviderProps) => {
   const userData = useAuth();
   const user = userData.getUser(userData.email, userData.password);
+  const cartObj = userData.getCart(userData.email, userData.password);
 
-  const [hexCode, setHexCode] = useState("");
-  const [date, setDate] = useState("");
-  const [cvv, setCvv] = useState("");
+  const addToCart = (product: Product) => {
+    const cart = cartObj.cart;
 
-  const [street, setStreet] = useState("");
-  const [apartment, setApartment] = useState("");
-  const [city, setCity] = useState("");
-  const [country, setCountry] = useState("");
-
-  const changeCard = (
-    email: string,
-    hexCode: string,
-    date: string,
-    cvv: string
-  ) => {
-    user.paymentMethod.hexCode = hexCode;
-    user.paymentMethod.date = date;
-    user.paymentMethod.cvv = cvv;
-
-    setHexCode(hexCode);
-    setDate(date);
-    setCvv(cvv);
+    cart.push(product);
 
     let index = null;
     Users.forEach((u, i) =>
-      u.email == user.email && u.password == user.password
-        ? (index = i)
-        : (index = null)
+      u.email == cartObj.email ? (index = i) : (index = null)
     );
 
-    if (index != null) Users[index] = user;
-  };
-  const changeAddress = (
-    email: string,
-    street: string,
-    apartment: string,
-    city: string,
-    country: string
-  ) => {
-    user.deliveryAdress.street = street;
-    user.deliveryAdress.apartment = apartment;
-    user.deliveryAdress.city = city;
-    user.deliveryAdress.country = country;
-
-    setApartment(apartment);
-    setStreet(street);
-    setCity(city);
-    setCountry(country);
-
-    let index = null;
-    Users.forEach((u, i) =>
-      u.email == user.email && u.password == user.password
-        ? (index = i)
-        : (index = null)
-    );
-    console.log(index);
-    console.log(Users);
-    if (index != null) Users[index] = user;
+    if (index != null) {
+      Users[index].cart = cart;
+      console.log(Users[index].cart);
+    }
   };
 
-  const contextValue = { user, changeCard, changeAddress };
+  const contextValue = { cartObj, addToCart };
+
   return (
-    <CartProvider.Provider value={contextValue}>
-      {children}
-    </CartProvider.Provider>
+    <CartContext.Provider value={contextValue}>{children}</CartContext.Provider>
   );
 };
 
