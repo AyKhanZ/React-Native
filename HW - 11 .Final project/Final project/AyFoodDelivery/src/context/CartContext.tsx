@@ -60,7 +60,7 @@ const CartProvider: React.FC<CartProviderProps> = ({
 
     if (index != null) {
       Users[index].cart = cart;
-      console.log(Users[index].cart);
+      // console.log(Users[index].cart);
     }
   };
 

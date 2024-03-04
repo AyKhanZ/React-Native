@@ -12,7 +12,7 @@ const FavoriteBtn = ({ isBig }: Props) => {
   const [isActive, setIsActive] = useState(false);
 
   return (
-    <Pressable style={styles.btn} onPress={() => setIsActive(!isActive)}>
+    <Pressable style={styles.btn} onPress={() => setIsActive((prev) => !prev)}>
       {isBig === true ? (
         <View
           style={isActive ? styles.containerActiveBig : styles.containerBig}
