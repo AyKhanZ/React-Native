@@ -28,9 +28,10 @@ type ProductProps = {
 type Props = {
   product: ProductProps;
   navigation?: StackNavigationProp<RootStackParams, "Login">;
+  showBtns: boolean;
 };
 
-const ProductItem = ({ product, navigation }: Props) => {
+const ProductItem = ({ product, showBtns, navigation }: Props) => {
   return (
     <Pressable
       onPress={() =>
@@ -56,10 +57,14 @@ const ProductItem = ({ product, navigation }: Props) => {
               € / {product.isPiece === true ? "piece" : "kg"}
             </Text>
           </View>
-          <View style={styles.btnsContainer}>
-            <FavoriteBtn isBig={false} />
-            <BasketBtn product={product} hasTitle={false} />
-          </View>
+          {showBtns ? (
+            <View style={styles.btnsContainer}>
+              <FavoriteBtn isBig={false} />
+              <BasketBtn product={product} hasTitle={false} />
+            </View>
+          ) : (
+            <></>
+          )}
         </View>
       </View>
     </Pressable>

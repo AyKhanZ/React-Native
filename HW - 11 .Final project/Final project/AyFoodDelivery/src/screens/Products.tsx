@@ -19,7 +19,12 @@ export default function Products({ navigation, route }: Props) {
   const data = params.data.products;
   function drawProducts() {
     return data.map((product: any, i: number) => (
-      <ProductItem product={product} key={i} navigation={navigation} />
+      <ProductItem
+        showBtns={true}
+        product={product}
+        key={i}
+        navigation={navigation}
+      />
     ));
   }
 

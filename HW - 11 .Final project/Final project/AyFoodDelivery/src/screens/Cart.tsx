@@ -20,7 +20,9 @@ const Cart = () => {
   const email = cart.cartObj.email;
 
   const showProducts = (c: any, n: number) => {
-    return c.map((p: any, n: number) => <ProductItem product={p} key={n} />);
+    return c.map((p: any, n: number) => (
+      <ProductItem showBtns={false} product={p} key={n} />
+    ));
   };
   const showUserProducts = () => {
     return Users.map((u: any, i: number) => {
