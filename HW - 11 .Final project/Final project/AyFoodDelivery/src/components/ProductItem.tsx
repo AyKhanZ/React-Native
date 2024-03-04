@@ -27,14 +27,14 @@ type ProductProps = {
 };
 type Props = {
   product: ProductProps;
-  navigation: StackNavigationProp<RootStackParams, "Login">;
+  navigation?: StackNavigationProp<RootStackParams, "Login">;
 };
 
 const ProductItem = ({ product, navigation }: Props) => {
   return (
     <Pressable
       onPress={() =>
-        navigation.navigate("Product", {
+        navigation?.navigate("Product", {
           product: product,
         })
       }
